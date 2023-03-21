@@ -8,6 +8,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	<link rel="stylesheet" href="../ownstyle.css">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -19,43 +20,39 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-			<li class="nav-item active"><a class="nav-link" href="#">Home <span
-					class="sr-only">(current)</span></a> 
-					</li>
-					 <li class="nav-item">
-					<a class="nav-link"
-					href="#">Orders</a> 
-					</li>
-					 <li class="nav-item">
-					<a class="nav-link" href="#">Customers</a>
-					</li>
-					 <li class="nav-item">
-				<a class="nav-link" href="#">Tasks</a>
+				<li class="nav-item active"><a class="nav-link" href="#">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Orders</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Customers</a>
 				</li>
+				<li class="nav-item"><a class="nav-link" href="#">Tasks</a></li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
-      <button class="btn btn-primary my-2 my-sm-0" type="submit">Sign-out</button>
-    </form>
+			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
+				method="post">
+				<button class="btn btn-primary my-2 my-sm-0" type="submit">Sign-out</button>
+			</form>
 		</div>
 	</nav>
+	
+	
 	<div class="container">
+	<br>
 		<h1>
-			Welcome <span sec:authentication="name"></span>!
+			Welcome <span sec:authentication="name"></span>
 		</h1>
-		<p>Date / Time / place holder</p>
-
+		<p id="date"/>
+<hr>
 		<h1>Task List</h1>
 		<table class="table table-striped">
 			<tbody>
 				<tr>
-					<th>Date</th>
 					<th>Task</th>
 					<th>Priority</th>
 					<th>Remove</th>
 					<th>Edit</th>
 				</tr>
 				<tr th:each="task: ${tasks}">
-					<td>Date</td>
 					<td th:text=${task.name}></td>
 					<td th:text=${task.priority.name}></td>
 					<td><a th:href="@{/delete/{id}(id=${task.id})}"
@@ -67,11 +64,12 @@
 			</tbody>
 		</table>
 		<a href="/addTask" class="btn btn-success">Add Task</a>
-
-	</div>
-
+<hr>
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Sign Out" />
 	</form>
+	</div>
+	
+	<script src="datetime.js"></script>
 </body>
 </html>
