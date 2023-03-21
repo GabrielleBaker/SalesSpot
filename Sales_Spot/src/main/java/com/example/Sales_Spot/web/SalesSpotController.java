@@ -55,11 +55,11 @@ public class SalesSpotController {
 //	}
 
 //new book
-	@RequestMapping(value = "/addtask", method = RequestMethod.GET)
+	@RequestMapping(value = "/addTask", method = RequestMethod.GET)
 	public String addtasks(Model model) {
 		model.addAttribute("task", new Task());
-		model.addAttribute("priority", priorityRepository.findAll());
-		return "addtask";
+		model.addAttribute("priorities", priorityRepository.findAll());
+		return "addTask";
 	}
 
 //save book
@@ -72,7 +72,7 @@ public class SalesSpotController {
 
 //delete book
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	@PreAuthorize("hasAuthority('ADMIN')")
+//	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deletetask(@PathVariable("id") Long taskId, Model model) {
 		repository.deleteById(taskId);
 		return "redirect:../home";
@@ -82,7 +82,7 @@ public class SalesSpotController {
 	@RequestMapping(value = "/edittask/{id}")
 	public String edittask(@PathVariable("id") Long taskId, Model model) {
 		model.addAttribute("task", repository.findById(taskId));
-		model.addAttribute("priority", priorityRepository.findAll());
+		model.addAttribute("priorities", priorityRepository.findAll());
 		return "edittask";
 	}
 
