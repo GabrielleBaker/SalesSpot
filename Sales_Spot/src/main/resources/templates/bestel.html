@@ -33,11 +33,7 @@
 		</div>
 	</nav>
 	<div class="container">
-		<br>
-		<h1>
-			Welcome <span sec:authentication="name"></span>
-		</h1>
-		<p id="date"/>
+
 <hr>
 		<h1>Orders</h1>
 		
@@ -48,21 +44,18 @@
 			<tbody>
 				<tr>
 					<th>Order No</th>
+					<th>Order Name</th>
 					<th>Customer</th>
 					<th>Due Date</th>
 					<th>Status</th>
 					<th>View Order</th>
 				</tr>
-				<tr th:each="order: ${orders}">
-					<td th:text=${order.id}></td>
-					<td th:text=${order.customer}></td>
-					<td th:text=${order.duedate}></td>
-					<td> <select id="orderstatus" th:field="*{order.status}"
-							class="form-control">
-							<option value="Ongoing">Ongoing</option>
-							<option value="Past">Past</option>
-						</select></td>
-					<td><a th:href="@{/editorder/{id}(id=${order.id})}" class="btn btn-primary">View Order</a></td>
+				<tr th:each="bestel: ${bestels}">
+					<td th:text=${bestel.name}></td>
+					<td th:text=${bestel.customer.name}></td>
+					<td th:text=${bestel.duedate}></td>
+					<td th:text=${bestel.status.name}></td>
+					
 				</tr>
 			</tbody>
 		</table>

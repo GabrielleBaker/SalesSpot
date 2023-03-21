@@ -10,7 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Order {
+public class Bestel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -21,16 +21,16 @@ public class Order {
 	@JsonIgnore
 	@JoinColumn(name = "customerId")
 	private Customer customer;
-
+//issues with the many to one relationship keep getting msg about cannot fetch lazily also cant use order as table name
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "statusId")
 	private Status status;
 
-	public Order() {
+	public Bestel() {
 	}
 
-	public Order(String name, Customer customer, String duedate, Status status) {
+	public Bestel(String name, Customer customer, String duedate, Status status) {
 		super();
 		this.name = name;
 		this.customer = customer;

@@ -20,7 +20,7 @@ public class Status {
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "status")
-	private List<Order> orders;
+	private List<Bestel> bestels;
 	
 	public Status() {
 		
@@ -42,15 +42,15 @@ public class Status {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Order> getOrders() {
-		return orders;
+	public List<Bestel> getBestels() {
+		return bestels;
 	}
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+	public void setBestels(List<Bestel> bestels) {
+		this.bestels = bestels;
 	}
 	@Override
 	public String toString() {
-		return "Status [statusId=" + statusId + ", name=" + name + ", orders=" + orders + "]";
+		return "Status [statusId=" + statusId + ", name=" + name + ", orders=" + bestels + "]";
 	}
 	
 }

@@ -9,7 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.Sales_Spot.domain.CustomerRepository;
+import com.example.Sales_Spot.domain.BestelRepository;
 import com.example.Sales_Spot.domain.PriorityRepository;
+import com.example.Sales_Spot.domain.StatusRepository;
 import com.example.Sales_Spot.domain.Task;
 import com.example.Sales_Spot.domain.TaskRepository;
 
@@ -20,7 +24,14 @@ public class SalesSpotController {
 	private TaskRepository repository;
 	@Autowired
 	private PriorityRepository priorityRepository;
-
+	@Autowired
+	private CustomerRepository custRepository;
+	@Autowired
+	private BestelRepository bestelRepository;
+	@Autowired
+	private StatusRepository statusRepository;
+	
+	
 	@RequestMapping(value = "/login")
 	public String login() {
 		return "login";
@@ -31,7 +42,7 @@ public class SalesSpotController {
 		return "login";
 	}
 
-	// ensuring login details
+	//home page
 	@RequestMapping(value = "/home")
 	public String helloSecure(Model model) {
 		UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -41,6 +52,17 @@ public class SalesSpotController {
 		model.addAttribute("tasks", repository.findAll());
 		return "home";
 	}
+	
+	//order page
+		@RequestMapping(value = "/bestel")
+		public String bestel(Model model) {
+			UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String username = user.getUsername();
+			// System.out.println("USERNAME: " + username);
+			model.addAttribute("name", username);
+			model.addAttribute("bestels", bestelRepository.findAll());
+			return "bestel";
+		}
 
 //REST get all books
 	//@RequestMapping(value = "/books", method = RequestMethod.GET)

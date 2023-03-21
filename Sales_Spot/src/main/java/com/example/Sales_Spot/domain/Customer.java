@@ -1,20 +1,30 @@
 package com.example.Sales_Spot.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long customerId;
 	private String name;
 	private String address;
 	private String shippingAddress;
 	private String contactNumber;
 	private String contactPerson;
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+	private List<Bestel> bestels;
 	
 	public Customer() {
 		
@@ -29,12 +39,14 @@ public class Customer {
 		this.contactPerson=contactPerson;
 	}
 
-	public Long getId() {
-		return id;
+	
+
+	public Long getCustomerId() {
+		return customerId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getName() {
@@ -77,9 +89,17 @@ public class Customer {
 		this.contactPerson = contactPerson;
 	}
 
+	public List<Bestel> getBestels() {
+		return bestels;
+	}
+
+	public void setBestels(List<Bestel> bestels) {
+		this.bestels = bestels;
+	}
+
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", address=" + address + ", shippingAddress=" + shippingAddress
+		return "Customer [id=" + customerId + ", name=" + name + ", address=" + address + ", shippingAddress=" + shippingAddress
 				+ ", contactNumber=" + contactNumber + ", contactPerson=" + contactPerson + "]";
 	}
 	
