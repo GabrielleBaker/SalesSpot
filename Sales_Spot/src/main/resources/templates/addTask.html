@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Sales Spot Tasks</title>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<h1>Add a task</h1>
+		<div>
+			<form th:object="${task}" th:action="@{/savetask}" action="#"
+				method="post">
+				<div class="form-group row">
+					<label for="details" class="col-sm-2 col-form-label">Task
+						information</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="details"
+							th:field="*{details}" />
+					</div>
+
+					<div style="clear: both; display: block; height: 10px;"></div>
+					<label for="prioritylist" class="col-sm-2 col-form-label">Priority</label>
+					<div class="col-sm-10">
+						<select id="prioritylist" th:field="*{priority}"
+							class="form-control">
+							<option value="high">High</option>
+							<option value="high">Medium</option>
+							<option value="low">Low</option>
+						</select>
+					</div>
+					<div style="clear: both; display: block; height: 10px;"></div>
+					<input type="submit" value="Save" class="btn btn-success"></input>
+					<a href="/booklist" class="btn btn-secondary">Cancel</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
