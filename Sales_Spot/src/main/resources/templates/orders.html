@@ -3,14 +3,42 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"><head>
 <title>Sales Spot Orders</title>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
-	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="#">Sales Spot</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item active"><a class="nav-link" href="#">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Orders</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Customers</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#">Tasks</a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
+				method="post">
+				<button class="btn btn-primary my-2 my-sm-0" type="submit">Sign-out</button>
+			</form>
+		</div>
+	</nav>
 	<div class="container">
-		<h1>Welcome  <span sec:authentication="name"></span>!</h1>
-		<p>Date / Time / Weather API place holder</p>
-		
+		<br>
+		<h1>
+			Welcome <span sec:authentication="name"></span>
+		</h1>
+		<p id="date"/>
+<hr>
 		<h1>Orders</h1>
 		
 		<a href="/newOrder" class="btn btn-success">New Order</a>
