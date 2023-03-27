@@ -21,21 +21,16 @@ public class Bestel {
 	@JsonIgnore
 	@JoinColumn(name = "customerId")
 	private Customer customer;
-//issues with the many to one relationship keep getting msg about cannot fetch lazily also cant use order as table name
-	@ManyToOne
-	@JsonIgnore
-	@JoinColumn(name = "statusId")
-	private Status status;
 
 	public Bestel() {
 	}
 
-	public Bestel(String name, Customer customer, String duedate, Status status) {
+	public Bestel(String name, Customer customer, String duedate) {
 		super();
 		this.name = name;
 		this.customer = customer;
 		this.duedate = duedate;
-		this.status = status;
+	
 	}
 
 	public Long getId() {
@@ -70,25 +65,13 @@ public class Bestel {
 		this.customer = customer;
 	}
 
-	public Status getStatus() {
-		return status;
-	}
 
-	public void setStatus(Status status) {
-		this.status = status;
-	}
 
 	@Override
 	public String toString() {
-		if (this.customer != null && this.status != null)
+		if (this.customer != null)
 			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate + ", customer=" + this.getCustomer()
-					+ ", status=" + this.getStatus() + "]";
-
-		else if (this.customer != null && this.status == null)
-			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate + ", customer=" + this.getCustomer();
-
-		else if (this.customer == null && this.status != null)
-			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate + ", status=" + this.getStatus() + "]";
+					+"]";
 
 		else
 			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate;

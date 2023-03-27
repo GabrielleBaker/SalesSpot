@@ -2,48 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-<title>Sales Spot</title>
+<title>Sales Spot Home</title>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-	<link rel="stylesheet" href="../ownstyle.css">
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a class="navbar-brand" href="#">Sales Spot</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link" href="#">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="/orders">Orders</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Customers</a>
+				<li class="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-bs-toggle="dropdown">Orders</button>
+
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/bestel">Order List</a> <a
+							class="dropdown-item" href="#">New Order</a>
+					</div>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Tasks</a></li>
+				<li class="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-bs-toggle="dropdown">Customers</button>
+
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">Customer List</a> <a
+							class="dropdown-item" href="#">New Customer</a>
+					</div>
+				</li>
 			</ul>
+
 			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
 				method="post">
 				<button class="btn btn-primary my-2 my-sm-0" type="submit">Sign-out</button>
 			</form>
 		</div>
 	</nav>
-	
-	
 	<div class="container">
-	<br>
+		<br>
 		<h1>
 			Welcome <span sec:authentication="name"></span>
 		</h1>
-		<p id="date"/>
-<hr>
-		<h1>Task List</h1>
+		<p id="date" />
+		<hr>
+		<h2>Task List</h2>
 		<table class="table table-striped">
 			<tbody>
 				<tr>
@@ -64,12 +81,12 @@
 			</tbody>
 		</table>
 		<a href="/addTask" class="btn btn-success">Add Task</a>
-<hr>
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out" />
-	</form>
-	</div>
+		<hr>
 	
+	</div>
+
 	<script src="datetime.js"></script>
+
+
 </body>
 </html>

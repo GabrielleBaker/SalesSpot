@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<title>Sales Spot View Order</title>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="#">Sales Spot</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item active"><a class="nav-link" href="/home">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-bs-toggle="dropdown">Orders</button>
+
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/bestel">Order List</a> <a
+							class="dropdown-item" href="#">New Order</a>
+					</div>
+				</li>
+				<li class="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-bs-toggle="dropdown">Customers</button>
+
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">Customer List</a> <a
+							class="dropdown-item" href="#">New Customer</a>
+					</div>
+				</li>
+			</ul>
+
+			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
+				method="post">
+				<button class="btn btn-primary my-2 my-sm-0" type="submit">Sign-out</button>
+			</form>
+		</div>
+	</nav>
+	<div class="container">
+
+		<hr>
+		<h1>Order</h1>
+
+		<form th:object="${bestel}" th:action="@{/editbestel}" action="#"
+			method="post">
+			<div class="form-group row">
+				<label for="name" class="col-sm-2 col-form-label">Order id:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="id" th:field="*{id}"
+						readonly />
+				</div>
+				<label for="name" class="col-sm-2 col-form-label">Order
+					name:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="bestelname"
+						th:field="*{name}" readonly />
+				</div>
+				<label for="name" class="col-sm-2 col-form-label">Customer:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="custname"
+						th:field="*{customer.name}" readonly />
+				</div>
+				<label for="name" class="col-sm-2 col-form-label">Shipping
+					Address:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="shipping"
+						th:field="*{customer.shippingAddress}" readonly />
+				</div>
+				<label for="name" class="col-sm-2 col-form-label">Contact
+					Number:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="shipping"
+						th:field="*{customer.contactNumber}" readonly />
+				</div>
+				<label for="name" class="col-sm-2 col-form-label">Due date:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="duedate"
+						th:field="*{duedate}" readonly />
+				</div>
+				<!-- need to figure out the issue with the session so I can create entities called item + status -->
+				<label for="items" class="col-sm-2 col-form-label">Items:</label>
+				<div class="col-sm-10">
+					
+				
+					<table class="table table-striped">
+						<tbody>
+							<tr>
+								<th>Item no</th>
+								<th>Item Name</th>
+								<th>Cost</th>
+								<th>Total</th>
+							</tr>
+							<tr th:each="bestel: ${bestels}">
+								<td th:text=${bestel.item.id}></td>
+								<td th:text=${bestel.item.name}></td>
+								<td th:text=${item.cost}></td>
+								<td>SUM</td>
+							</tr>
+						</tbody>
+					</table>
+						</div>
+					<label for="name" class="col-sm-2 col-form-label">Delivery
+						Status:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="status"
+							th:field="*{duedate}" readonly />
+					</div>
+				</div>
+				
+		</form>
+		<hr>
+		<!-- button not working -->
+<a  th:field="*{id}" href="/editbestel/{id}(id=${bestel.id})"
+						class="btn btn-primary">Edit</a>
+						
+	</div>
+
+</body>
+</html>

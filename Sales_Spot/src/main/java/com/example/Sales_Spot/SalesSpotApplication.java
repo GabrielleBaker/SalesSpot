@@ -15,8 +15,6 @@ import com.example.Sales_Spot.domain.Bestel;
 import com.example.Sales_Spot.domain.BestelRepository;
 import com.example.Sales_Spot.domain.Priority;
 import com.example.Sales_Spot.domain.PriorityRepository;
-import com.example.Sales_Spot.domain.Status;
-import com.example.Sales_Spot.domain.StatusRepository;
 import com.example.Sales_Spot.domain.Task;
 import com.example.Sales_Spot.domain.TaskRepository;
 
@@ -30,8 +28,7 @@ public class SalesSpotApplication {
 
 	@Bean
 	public CommandLineRunner demo(TaskRepository repository, PriorityRepository priorityRepository,
-			AppUserRepository urepository, CustomerRepository customerRepository, BestelRepository bestelRepository,
-			StatusRepository statusRepository) {
+			AppUserRepository urepository, CustomerRepository customerRepository, BestelRepository bestelRepository) {
 		return (args) -> {
 			// some priority levels
 			log.info("save a couple of tasks");
@@ -50,12 +47,10 @@ public class SalesSpotApplication {
 			customerRepository.save(new Customer("Musti ja Mirri", "274 Kat Kattu Helsinki", "22 Polkupolku Helsinki",
 					"+358 46 8800 407", "Joe"));
 			
-			//status
-			statusRepository.save(new Status("Shipped"));
-			
+		
 			// order
-			Bestel bestel1 = new Bestel("O1", customerRepository.findByName("Musti ja Mirri").get(0), "2021",
-					statusRepository.findByName("Shipped").get(0));
+			Bestel bestel1 = new Bestel("O1", customerRepository.findByName("Musti ja Mirri").get(0), "2021"
+				);
 
 			bestelRepository.save(bestel1);
 

@@ -1,7 +1,6 @@
 package com.example.Sales_Spot.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.Sales_Spot.domain.CustomerRepository;
 import com.example.Sales_Spot.domain.BestelRepository;
 import com.example.Sales_Spot.domain.PriorityRepository;
-import com.example.Sales_Spot.domain.StatusRepository;
 import com.example.Sales_Spot.domain.Task;
 import com.example.Sales_Spot.domain.TaskRepository;
 
@@ -28,9 +26,6 @@ public class SalesSpotController {
 	private CustomerRepository custRepository;
 	@Autowired
 	private BestelRepository bestelRepository;
-	@Autowired
-	private StatusRepository statusRepository;
-	
 	
 	@RequestMapping(value = "/login")
 	public String login() {
@@ -62,6 +57,22 @@ public class SalesSpotController {
 			model.addAttribute("name", username);
 			model.addAttribute("bestels", bestelRepository.findAll());
 			return "bestel";
+		}
+		
+		//view order
+		@RequestMapping(value = "/viewbestel/{id}")
+		public String viewbestel(@PathVariable("id") Long bestelId, Model model) {
+			model.addAttribute("bestel", bestelRepository.findById(bestelId));
+		//	model.addAttribute("customer", custRepository.findAll());
+			return "viewbestel";
+		}
+		
+		//edit order
+		@RequestMapping(value = "/editbestel/{id}")
+		public String editbestel(@PathVariable("id") Long bestelId, Model model) {
+			model.addAttribute("bestel", bestelRepository.findById(bestelId));
+			model.addAttribute("customers", custRepository.findAll());
+			return "editbestel";
 		}
 
 //REST get all books
