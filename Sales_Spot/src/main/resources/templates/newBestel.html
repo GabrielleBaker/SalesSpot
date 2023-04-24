@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<title>Sales Spot Home</title>
+<title>Sales Spot New Order</title>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-
-<!-- Latest compiled JavaScript -->
-<script
+	<script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">
 	</script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a class="navbar-brand" href="#">Sales Spot</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
@@ -25,7 +22,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item active"><a class="nav-link" href="#">Home
+				<li class="nav-item active"><a class="nav-link" href="/home">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="dropdown">
@@ -34,7 +31,7 @@
 
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="/bestel">Order List</a> <a
-							class="dropdown-item" href="/newBestel">New Order</a>
+							class="dropdown-item" href="#">New Order</a>
 					</div>
 				</li>
 				<li class="dropdown">
@@ -46,9 +43,6 @@
 							class="dropdown-item" href="#">New Customer</a>
 					</div>
 				</li>
-				<li class="nav-item active"><a class="nav-link" href="/productList">Products
-						<span class="sr-only"></span>
-				</a></li>
 			</ul>
 
 			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
@@ -58,39 +52,48 @@
 		</div>
 	</nav>
 	<div class="container">
-		<br>
-		<h1>
-			Welcome <span sec:authentication="name"></span>
-		</h1>
-		<p id="date" />
-		<hr>
-		<h2>Task List</h2>
-		<table class="table table-striped">
-			<tbody>
-				<tr>
-					<th>Task</th>
-					<th>Priority</th>
-					<th>Remove</th>
-					<th>Edit</th>
-				</tr>
-				<tr th:each="task: ${tasks}">
-					<td th:text=${task.name}></td>
-					<td th:text=${task.priority.name}></td>
-					<td><a th:href="@{/delete/{id}(id=${task.id})}"
-						class="btn btn-danger">Delete</a></td>
-					<td><a th:href="@{/edittask/{id}(id=${task.id})}"
-						class="btn btn-primary">Edit</a></td>
+		<h1>New Order</h1>
+		<div>
+			<form th:object="${bestel}" th:action="@{/savebestel}" action="#"
+				method="post">
+				<div class="form-group row">
 
-				</tr>
-			</tbody>
-		</table>
-		<a href="/addTask" class="btn btn-success">Add Task</a>
-		<hr>
-	
+				<label for="name" class="col-sm-2 col-form-label">Order
+					name:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="bestelname"
+						th:field="*{name}" />
+				</div>
+					<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="customerlist" class="col-sm-2 col-form-label">Customer</label>
+				<div class="col-sm-10">
+					<select id="customerlist" th:field="*{customer}"
+						class="form-control">
+						<option th:each="customer: ${customers}"
+							th:value="${customer.customerId}" th:text="${customer.name}"></option>
+					</select>
+				</div>
+
+					<label for="duedate" class="col-sm-2 col-form-label">Due
+						Date</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="duedate"
+							th:field="*{duedate}" />
+					</div>
+
+				<label for="status" class="col-sm-2 col-form-label">Status</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="status"
+							th:field="*{status}" />
+					</div>
+					
+				
+					<div style="clear: both; display: block; height: 10px;"></div>
+					<input type="submit" value="Save" class="btn btn-success"></input>
+					<a href="/bestel" class="btn btn-secondary">Cancel</a>
+				</div>
+			</form>
+		</div>
 	</div>
-
-	<script src="datetime.js"></script>
-
-
 </body>
 </html>

@@ -16,20 +16,27 @@ public class Bestel {
 	private Long id;
 	private String name;
 	private String duedate;
+	private String status;
 
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "customerId")
 	private Customer customer;
 
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "productId")
+	private Product product;
+	
 	public Bestel() {
 	}
 
-	public Bestel(String name, Customer customer, String duedate) {
+	public Bestel(String name, Customer customer, String duedate, String status) {
 		super();
 		this.name = name;
 		this.customer = customer;
 		this.duedate = duedate;
+		this.status=status;
 	
 	}
 
@@ -66,15 +73,22 @@ public class Bestel {
 	}
 
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
 		if (this.customer != null)
 			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate + ", customer=" + this.getCustomer()
-					+"]";
+					+" status=" + status +" ]";
 
 		else
-			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate;
+			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate+", status=" + status;
 
 	}
 }

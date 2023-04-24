@@ -17,7 +17,8 @@ import com.example.Sales_Spot.domain.Priority;
 import com.example.Sales_Spot.domain.PriorityRepository;
 import com.example.Sales_Spot.domain.Task;
 import com.example.Sales_Spot.domain.TaskRepository;
-
+import com.example.Sales_Spot.domain.Product;
+import com.example.Sales_Spot.domain.ProductRepository;
 @SpringBootApplication
 public class SalesSpotApplication {
 	private static final Logger log = LoggerFactory.getLogger(SalesSpotApplication.class);
@@ -28,7 +29,8 @@ public class SalesSpotApplication {
 
 	@Bean
 	public CommandLineRunner demo(TaskRepository repository, PriorityRepository priorityRepository,
-			AppUserRepository urepository, CustomerRepository customerRepository, BestelRepository bestelRepository) {
+			AppUserRepository urepository, CustomerRepository customerRepository, 
+			BestelRepository bestelRepository, ProductRepository productRepository) {
 		return (args) -> {
 			// some priority levels
 			log.info("save a couple of tasks");
@@ -44,15 +46,21 @@ public class SalesSpotApplication {
 
 			// some customers
 			log.info("save a couple of customers");
-			customerRepository.save(new Customer("Musti ja Mirri", "274 Kat Kattu Helsinki", "22 Polkupolku Helsinki",
-					"+358 46 8800 407", "Joe"));
+			customerRepository.save(new Customer("Musti ja Mirri", "274 Koira Katu Helsinki", "22 Lintu Polku Helsinki",
+					"0800 305305", "Joe"));
 			
+			//some products
+			log.info("save a couple of products");
+			productRepository.save(new Product("Kong Chew Toy", "Large plastic chew toy for dogs","12.00"));
 		
 			// order
-			Bestel bestel1 = new Bestel("O1", customerRepository.findByName("Musti ja Mirri").get(0), "2021"
+			Bestel bestel1 = new Bestel("Winter selection", customerRepository.findByName("Musti ja Mirri").get(0), "2021","delivered"
 				);
+			Bestel bestel2 = new Bestel("Spring selection", customerRepository.findByName("Musti ja Mirri").get(0), "2022","shipped"
+					);
 
 			bestelRepository.save(bestel1);
+			bestelRepository.save(bestel2);
 
 			// Create users: admin/admin user/user
 			AppUser user1 = new AppUser("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6",
