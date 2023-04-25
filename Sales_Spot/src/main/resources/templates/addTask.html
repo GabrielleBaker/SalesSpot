@@ -12,7 +12,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a class="navbar-brand" href="#">Sales Spot</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
@@ -22,7 +22,7 @@
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link" href="/home">Home
-						<span class="sr-only">(current)</span>
+						<span class="sr-only"></span>
 				</a></li>
 				<li class="dropdown">
 					<button type="button" class="btn btn-primary dropdown-toggle"
@@ -38,10 +38,22 @@
 						data-bs-toggle="dropdown">Customers</button>
 
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Customer List</a> <a
-							class="dropdown-item" href="#">New Customer</a>
+						<a class="dropdown-item" href="/customerlist">Customer List</a> <a
+							class="dropdown-item" href="/newcustomer">New Customer</a>
 					</div>
 				</li>
+				<li sec:authorize="hasAuthority('ADMIN')" class="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-bs-toggle="dropdown">Products</button>
+
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/productList">Product Catalog</a> <a
+							class="dropdown-item" href="/newproduct">New Product</a>
+					</div>
+				</li>
+				<li sec:authorize="hasAuthority('USER')" class="nav-item active"><a class="nav-link" href="/productList">Products
+						<span class="sr-only"></span>
+				</a></li>
 			</ul>
 
 			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"

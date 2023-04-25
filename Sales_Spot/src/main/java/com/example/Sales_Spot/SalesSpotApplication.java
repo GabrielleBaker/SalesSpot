@@ -19,6 +19,8 @@ import com.example.Sales_Spot.domain.Task;
 import com.example.Sales_Spot.domain.TaskRepository;
 import com.example.Sales_Spot.domain.Product;
 import com.example.Sales_Spot.domain.ProductRepository;
+import com.example.Sales_Spot.domain.Status;
+import com.example.Sales_Spot.domain.StatusRepository;
 @SpringBootApplication
 public class SalesSpotApplication {
 	private static final Logger log = LoggerFactory.getLogger(SalesSpotApplication.class);
@@ -30,7 +32,7 @@ public class SalesSpotApplication {
 	@Bean
 	public CommandLineRunner demo(TaskRepository repository, PriorityRepository priorityRepository,
 			AppUserRepository urepository, CustomerRepository customerRepository, 
-			BestelRepository bestelRepository, ProductRepository productRepository) {
+			BestelRepository bestelRepository, ProductRepository productRepository, StatusRepository statusRepository) {
 		return (args) -> {
 			// some priority levels
 			log.info("save a couple of tasks");
@@ -55,12 +57,22 @@ public class SalesSpotApplication {
 			log.info("save a couple of products");
 			productRepository.save(new Product("Kong Chew Toy", "Large plastic chew toy for dogs",(long) 12));
 		
-			// order
+			//some statuses
+			log.info("some statuses");
+			statusRepository.save(new Status("Opened"));
+			statusRepository.save(new Status("Pending"));
+			statusRepository.save(new Status("Shipped"));
+			statusRepository.save(new Status("Delivered"));
+			statusRepository.save(new Status("Cancelled"));
+			
+			// some orders
 			Bestel bestel1 = new Bestel("Winter selection", customerRepository.findByName("Petenkoira").get(0), 
-					productRepository.findByName("Kong Chew Toy").get(0), (long) 100,"2021","delivered"
-				);
+					productRepository.findByName("Kong Chew Toy").get(0), 
+					(long) 100,"2021",statusRepository.findByName("Shipped").get(0)
+					);
 			Bestel bestel2 = new Bestel("Spring selection", customerRepository.findByName("Musti ja Mirri").get(0), 
-					productRepository.findByName("Kong Chew Toy").get(0), (long) 50,"2022","shipped"
+					productRepository.findByName("Kong Chew Toy").get(0), 
+					(long) 50,"2022",statusRepository.findByName("Pending").get(0)
 					);
 
 			bestelRepository.save(bestel1);

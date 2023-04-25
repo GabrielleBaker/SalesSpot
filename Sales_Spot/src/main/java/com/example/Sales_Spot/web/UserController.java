@@ -59,7 +59,7 @@ public class UserController {
 		} else {
 			return "signup";
 		}
-		return "redirect:/login";
+		return "redirect:/home";
 	}
 
 }

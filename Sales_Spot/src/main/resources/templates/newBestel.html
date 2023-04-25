@@ -39,10 +39,22 @@
 						data-bs-toggle="dropdown">Customers</button>
 
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Customer List</a> <a
-							class="dropdown-item" href="#">New Customer</a>
+						<a class="dropdown-item" href="/customerlist">Customer List</a> <a
+							class="dropdown-item" href="/newcustomer">New Customer</a>
 					</div>
 				</li>
+				<li sec:authorize="hasAuthority('ADMIN')" class="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-bs-toggle="dropdown">Products</button>
+
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/productList">Product Catalog</a> <a
+							class="dropdown-item" href="/newproduct">New Product</a>
+					</div>
+				</li>
+				<li sec:authorize="hasAuthority('USER')" class="nav-item active"><a class="nav-link" href="/productList">Products
+						<span class="sr-only"></span>
+				</a></li>
 			</ul>
 
 			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
@@ -51,7 +63,9 @@
 			</form>
 		</div>
 	</nav>
-	<div class="container">
+	<br>
+	<div class="container" style="background-color:#c7ecfc; padding:2rem;max-width:80%;border-radius: 25px;">
+		
 		<h1>New Order</h1>
 		<div>
 			<form th:object="${bestel}" th:action="@{/savebestel}" action="#"
@@ -65,7 +79,7 @@
 						th:field="*{name}" />
 				</div>
 					<div style="clear: both; display: block; height: 10px;"></div>
-				<label for="customerlist" class="col-sm-2 col-form-label">Customer</label>
+				<label for="customerlist" class="col-sm-2 col-form-label">Customer:</label>
 				<div class="col-sm-10">
 					<select id="customerlist" th:field="*{customer}"
 						class="form-control">
@@ -75,13 +89,13 @@
 				</div>
 
 					<label for="duedate" class="col-sm-2 col-form-label">Due
-						Date</label>
+						Date:</label>
 					<div class="col-sm-10">
 						<input type="date" class="form-control" id="duedate"
 							th:field="*{duedate}" />
 					</div>
 				<div style="clear: both; display: block; height: 10px;"></div>
-				<label for="productlist" class="col-sm-2 col-form-label">Product</label>
+				<label for="productlist" class="col-sm-2 col-form-label">Product:</label>
 				<div class="col-sm-10">
 					<select id="productlist" th:field="*{product}"
 						class="form-control">
@@ -98,12 +112,15 @@
 						th:field="*{quantity}" />
 				</div>
 
-				<label for="status" class="col-sm-2 col-form-label">Status</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="status"
-							th:field="*{status}" />
-					</div>
-					
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="status" class="col-sm-2 col-form-label">Order Status:</label>
+				<div class="col-sm-10">
+					<select id="status" th:field="*{status}"
+						class="form-control">
+						<option th:each="status: ${statuses}"
+							th:value="${status.statusId}" th:text="${status.name}"></option>
+					</select>
+				</div>
 				
 					<div style="clear: both; display: block; height: 10px;"></div>
 					<input type="submit" value="Save" class="btn btn-success"></input>

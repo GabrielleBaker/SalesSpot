@@ -39,10 +39,22 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 						data-bs-toggle="dropdown">Customers</button>
 
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Customer List</a> <a
-							class="dropdown-item" href="#">New Customer</a>
+						<a class="dropdown-item" href="/customerlist">Customer List</a> <a
+							class="dropdown-item" href="/newcustomer">New Customer</a>
 					</div>
 				</li>
+				<li sec:authorize="hasAuthority('ADMIN')" class="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle"
+						data-bs-toggle="dropdown">Products</button>
+
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/productList">Product Catalog</a> <a
+							class="dropdown-item" href="/newproduct">New Product</a>
+					</div>
+				</li>
+				<li sec:authorize="hasAuthority('USER')" class="nav-item active"><a class="nav-link" href="/productList">Products
+						<span class="sr-only"></span>
+				</a></li>
 			</ul>
 
 			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"

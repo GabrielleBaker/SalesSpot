@@ -1,19 +1,19 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-<title>New Salesperson</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">
-	</script>
+<title>Sales Spot Edit Customer</title>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">
+	</script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a class="navbar-brand" href="#">Sales Spot</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
@@ -52,12 +52,7 @@
 							class="dropdown-item" href="/newproduct">New Product</a>
 					</div>
 				</li>
-				<li sec:authorize="hasAuthority('USER')" class="nav-item active">
-				<a class="nav-link" href="/productList">Products
-						<span class="sr-only"></span>
-				</a></li>
-				<li sec:authorize="hasAuthority('ADMIN')" class="nav-item active">
-				<a class="nav-link" href="#">New User
+				<li sec:authorize="hasAuthority('USER')" class="nav-item active"><a class="nav-link" href="/productList">Products
 						<span class="sr-only"></span>
 				</a></li>
 			</ul>
@@ -68,41 +63,53 @@
 			</form>
 		</div>
 	</nav>
-	<br>
 	<div class="container">
-		<h1>Register New Salesperson</h1>
-		<div class="col-md-4">
-			<form th:object="${signupform}" th:action="@{/saveuser}" action="#"
-				method="post">
-				<div>
-					<label> Username :<input type="text" th:field="*{username}"
-						class="form-control" /></label>
-					<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username
-						Error</p>
+
+		<br>
+		<h1>Edit Customer</h1>
+		<hr>
+		<form th:object="${customer}" th:action="@{/savecustomer}" action="#"
+			method="post">
+			<div class="form-group row">
+			<input type="text" class="form-control" id="id" th:field="*{customerId}"
+							hidden="hidden" />
+				<label for="name" class="col-sm-2 col-form-label">Customer
+					Name:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="custname"
+						th:field="*{name}" />
 				</div>
-				<div>
-					<label> Password :<input type="password"
-						th:field="*{password}" class="form-control" /></label>
-					<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
-						Error</p>
+				<label for="address" class="col-sm-2 col-form-label">Customer
+						Address:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="custadd"
+						th:field="*{address}" />
 				</div>
-				<div>
-					<label> Re-type Password: <input type="password"
-						th:field="*{passwordCheck}" class="form-control" /></label>
-					<p th:if="${#fields.hasErrors('passwordCheck')}"
-						th:errors="*{passwordCheck}">Password Match Error</p>
+			<label for="saddress" class="col-sm-2 col-form-label">Shipping Address:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="saddress"
+						th:field="*{shippingAddress}" />
 				</div>
-				<div>
-					<label> Email :<input type="email" th:field="*{email}"
-						class="form-control" /></label>
-					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
-						Error</p>
+			<label for="contactname" class="col-sm-2 col-form-label">Contact Person:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="contactname"
+						th:field="*{contactPerson}" />
 				</div>
-				<input type="submit" class="btn btn-success" value="Register"></input>
-			</form>
-			<br>
-		<!--  	<a href="/login" class="btn btn-primary">Sign-in</a>-->
-		</div>
+				<label for="contactno" class="col-sm-2 col-form-label">Contact Number:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="contactno"
+						th:field="*{contactNumber}" />
+				</div>
+				
+		
+			<div style="clear: both; display: block; height: 10px;"></div>
+			</div>
+			<hr>
+			<input type="submit" value="Save" class="btn btn-success"></input>
+		<a href="/bestel" class="btn btn-secondary">Cancel</a>
+		</form>
+		
+
 	</div>
 </body>
 </html>
