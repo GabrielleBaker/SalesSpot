@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+	>
 <head>
 <title>Sales Spot Order Summary</title>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -91,28 +93,29 @@
 					<input type="text" class="form-control" id="duedate"
 						th:field="*{duedate}" readonly />
 				</div>
-				<label for="items" class="col-sm-2 col-form-label">Items:</label>
-				<div class="col-sm-10">
-					
 				
-					<table class="table table-striped">
-						<tbody>
-							<tr>
-								<th></th>
-								<th>Item no</th>
-								<th>Item Name</th>
-								<th>Cost</th>
-								<th>Total</th>
-							</tr>
-							<tr th:each="bestel: ${bestels}">
-								<td th:text=${bestel.item.id}></td>
-								<td th:field=${bestel.status}></td>
-								<td th:text=${item.cost}></td>
-								
-							</tr>
-						</tbody>
-					</table>
-						</div>
+				<label for="product" class="col-sm-2 col-form-label">Item:</label>
+				<div class="col-sm-10">
+				<input type="text" class="form-control" id="product"
+						th:field="*{product.name}" readonly />
+				</div>	
+				<label for="productqty" class="col-sm-2 col-form-label">Quantity:</label>
+				<div class="col-sm-10">
+				<input type="number" class="form-control" id="quantity"
+						th:field="*{quantity}" readonly />
+				</div>
+				<label for="unitprice" class="col-sm-2 col-form-label">Unit Price:</label>
+				<div class="col-sm-10">
+				<input type="number" class="form-control" id="price"
+						th:field="*{product.price}" readonly />
+				</div>
+				<!-- issue with total calculation -->
+				<label for="totalprice" class="col-sm-2 col-form-label">Total:</label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" id="totalprice" 
+					value="${product.getPrice() * quantity}"
+       			 readonly/>
+       			</div>
 					<label for="name" class="col-sm-2 col-form-label">Delivery
 						Status:</label>
 					<div class="col-sm-10">

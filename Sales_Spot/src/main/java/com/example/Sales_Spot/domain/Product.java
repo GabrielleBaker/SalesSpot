@@ -15,10 +15,10 @@ import jakarta.persistence.OneToMany;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long productId;
 	private String name;
 	private String description;
-	private String price;
+	private Long price;
 		
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
@@ -28,19 +28,19 @@ public class Product {
 		
 	}
 	
-	public Product(String name, String description,String price) {
+	public Product(String name, String description,Long price) {
 		super();
 		this.name=name;
 		this.description=description;
 		this.price=price;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setId(Long productId) {
-		this.id = productId;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
 	public String getName() {
@@ -59,18 +59,12 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Long price) {
 		this.price = price;
-	}
-
-	@Override
-	public String toString() {
-		return "Product [productId=" + id + ", name=" + name + ", description=" + description + ", price="
-				+ price + "]";
 	}
 
 	public List<Bestel> getBestels() {
@@ -80,7 +74,11 @@ public class Product {
 	public void setBestels(List<Bestel> bestels) {
 		this.bestels = bestels;
 	}
-
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", name=" + name + ", description=" + description + ", price="
+				+ price + "]";
+	}
 
 
 	}

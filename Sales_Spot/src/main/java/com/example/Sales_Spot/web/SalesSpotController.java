@@ -29,9 +29,9 @@ public class SalesSpotController {
 	@Autowired
 	private CustomerRepository custRepository;
 	@Autowired
-	private BestelRepository bestelRepository;
-	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
+	private BestelRepository bestelRepository;
 	
 	@RequestMapping(value = "/login")
 	public String login() {
@@ -58,10 +58,6 @@ public class SalesSpotController {
 	//order might be a keyword, bestel = to order in Afrikaans
 		@RequestMapping(value = "/bestel")
 		public String bestel(Model model) {
-			UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			String username = user.getUsername();
-			// System.out.println("USERNAME: " + username);
-			model.addAttribute("name", username);
 			model.addAttribute("bestels", bestelRepository.findAll());
 			return "bestel";
 		}
@@ -78,6 +74,7 @@ public class SalesSpotController {
 		public String editbestel(@PathVariable("id") Long bestelId, Model model) {
 			model.addAttribute("bestel", bestelRepository.findById(bestelId));
 			model.addAttribute("customers", custRepository.findAll());
+			model.addAttribute("products",productRepository.findAll());
 			return "editbestel";
 		}
 		
@@ -87,6 +84,7 @@ public class SalesSpotController {
 			model.addAttribute("bestel", new Bestel());
 			model.addAttribute("priorities", priorityRepository.findAll());
 			model.addAttribute("customers", custRepository.findAll());
+			model.addAttribute("products", productRepository.findAll());
 			return "newBestel";
 		}
 		//save order

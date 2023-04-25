@@ -48,15 +48,19 @@ public class SalesSpotApplication {
 			log.info("save a couple of customers");
 			customerRepository.save(new Customer("Musti ja Mirri", "274 Koira Katu Helsinki", "22 Lintu Polku Helsinki",
 					"0800 305305", "Joe"));
+			customerRepository.save(new Customer("Petenkoira", "274 Koira Katu Helsinki", "22 Lintu Polku Helsinki",
+					"0800 305305", "Joe"));
 			
 			//some products
 			log.info("save a couple of products");
-			productRepository.save(new Product("Kong Chew Toy", "Large plastic chew toy for dogs","12.00"));
+			productRepository.save(new Product("Kong Chew Toy", "Large plastic chew toy for dogs",(long) 12));
 		
 			// order
-			Bestel bestel1 = new Bestel("Winter selection", customerRepository.findByName("Musti ja Mirri").get(0), "2021","delivered"
+			Bestel bestel1 = new Bestel("Winter selection", customerRepository.findByName("Petenkoira").get(0), 
+					productRepository.findByName("Kong Chew Toy").get(0), (long) 100,"2021","delivered"
 				);
-			Bestel bestel2 = new Bestel("Spring selection", customerRepository.findByName("Musti ja Mirri").get(0), "2022","shipped"
+			Bestel bestel2 = new Bestel("Spring selection", customerRepository.findByName("Musti ja Mirri").get(0), 
+					productRepository.findByName("Kong Chew Toy").get(0), (long) 50,"2022","shipped"
 					);
 
 			bestelRepository.save(bestel1);

@@ -17,7 +17,7 @@ public class Bestel {
 	private String name;
 	private String duedate;
 	private String status;
-
+	private Long quantity;
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "customerId")
@@ -31,12 +31,14 @@ public class Bestel {
 	public Bestel() {
 	}
 
-	public Bestel(String name, Customer customer, String duedate, String status) {
+	public Bestel(String name, Customer customer,Product product, Long quantity, String duedate, String status) {
 		super();
 		this.name = name;
 		this.customer = customer;
 		this.duedate = duedate;
 		this.status=status;
+		this.product=product;
+		this.quantity=quantity;
 	
 	}
 
@@ -71,7 +73,15 @@ public class Bestel {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	
+	
+	public Product getProduct() {
+		return product;
+	}
 
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
 	public String getStatus() {
 		return status;
@@ -80,15 +90,31 @@ public class Bestel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+
+	public Long getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
+	}
 
 	@Override
 	public String toString() {
-		if (this.customer != null)
+		if (this.customer != null && this.product!=null)
 			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate + ", customer=" + this.getCustomer()
-					+" status=" + status +" ]";
+					+" product= " +this.getProduct()+" status=" + status +"quantity"+quantity+" ]";
+
+		else if(this.customer!= null && this.product== null)
+			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate + ", customer=" + this.getCustomer()
+			+" status=" + status +" ]";
+		else if( this.customer== null && this.product!= null)
+			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate 
+			+" product= " +this.getProduct()+" status=" + status +"quantity"+quantity+" ]";
 
 		else
-			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate+", status=" + status;
+			return "Order [id=" + id + ", name=" + name + ", duedate=" + duedate+", status=" + status +"quantity"+quantity;
 
 	}
 }

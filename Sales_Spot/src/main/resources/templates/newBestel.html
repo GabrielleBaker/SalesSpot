@@ -77,9 +77,26 @@
 					<label for="duedate" class="col-sm-2 col-form-label">Due
 						Date</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="duedate"
+						<input type="date" class="form-control" id="duedate"
 							th:field="*{duedate}" />
 					</div>
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="productlist" class="col-sm-2 col-form-label">Product</label>
+				<div class="col-sm-10">
+					<select id="productlist" th:field="*{product}"
+						class="form-control">
+						<option th:each="product: ${products}"
+							th:value="${product.productId}" th:text="${product.name}"></option>
+					</select>
+				</div>
+				
+				<div style="clear: both; display: block; height: 10px;"></div>
+				<label for="productqty" class="col-sm-2 col-form-label">Quantity:</label>
+				<div class="col-sm-10">
+				
+				<input type="number" class="qty" id="quantity" 
+						th:field="*{quantity}" />
+				</div>
 
 				<label for="status" class="col-sm-2 col-form-label">Status</label>
 					<div class="col-sm-10">
