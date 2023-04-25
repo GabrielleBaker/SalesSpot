@@ -54,6 +54,10 @@
 				<li sec:authorize="hasAuthority('USER')" class="nav-item active"><a class="nav-link" href="/productList">Products
 						<span class="sr-only"></span>
 				</a></li>
+				<li sec:authorize="hasAuthority('ADMIN')" class="nav-item active">
+				<a class="nav-link" href="/signup">New User
+						<span class="sr-only"></span>
+				</a></li>
 			</ul>
 
 			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
@@ -61,6 +65,7 @@
 				<button class="btn btn-primary my-2 my-sm-0" type="submit">Sign-out</button>
 			</form>
 		</div>
+		
 	</nav>
 	<div class="container">
 

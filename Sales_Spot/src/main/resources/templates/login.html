@@ -9,10 +9,11 @@
     <body>
     <div class="container">
     <br>
+    <div style="background-color:#c7ecfc; padding:2rem;max-width:50%;border-radius: 25px;margin:auto;text-align:center">
     <h1>Sales Spot</h1>
     <h2>Sign-in portal</h2>
     
-     <div class="col-md-4 col-md-offset-4">
+     <div >
         <div class="alert alert-danger" th:if="${param.error}">
             Invalid login credentials.
         </div>
@@ -24,8 +25,9 @@
             <div><label> Password: <input type="password" name="password" class="form-control"/> </label></div>
             <div><input type="submit" value="Sign In" class="btn btn-success"/></div>
         </form>
+        </div>
         <hr>
-     <!-- <a th:href="@{/signup}" class="btn btn-primary">Sign-up</a> -->   
+    
        </div>
        </div>
     </body>
