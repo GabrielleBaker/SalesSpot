@@ -1,6 +1,7 @@
 package com.example.Sales_Spot.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,9 @@ public class UserController {
 	@Autowired
 	private AppUserRepository repository;
 
+	//only the admin may register new sales persons
 	@RequestMapping(value = "signup")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addUser(Model model) {
 		model.addAttribute("signupform", new SignupForm());
 		return "signup";
@@ -35,18 +38,21 @@ public class UserController {
 	 */
 	@RequestMapping(value = "saveuser", method = RequestMethod.POST)
 	public String save(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
-		if (!bindingResult.hasErrors()) { // validation errors
-			if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) { // check password match
+		//check for validation errors
+		if (!bindingResult.hasErrors()) { 
+			// check if the passwords match
+			if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) { 
 				String pwd = signupForm.getPassword();
 				BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 				String hashPwd = bc.encode(pwd);
-
+				//create new user
 				AppUser newUser = new AppUser();
 				newUser.setPasswordHash(hashPwd);
 				newUser.setUsername(signupForm.getUsername());
 				newUser.setRole("USER");
 				newUser.setEmail(signupForm.getEmail());
-				if (repository.findByUsername(signupForm.getUsername()) == null) { // Check if user exists
+				// Check if already user exists before saving
+				if (repository.findByUsername(signupForm.getUsername()) == null) { 
 					repository.save(newUser);
 				} else {
 					bindingResult.rejectValue("username", "err.username", "Username already exists");

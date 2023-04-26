@@ -1,6 +1,6 @@
 package com.example.Sales_Spot.domain;
 import jakarta.validation.constraints.*;
-
+//sign up form for admin to register new sales staff
 public class SignupForm {
     @NotEmpty
     @Size(min=5, max=30)

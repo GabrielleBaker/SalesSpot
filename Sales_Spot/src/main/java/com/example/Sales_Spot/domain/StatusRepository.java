@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-
+//repository for order status
 public interface StatusRepository extends CrudRepository<Status, Long>{
 Status findById(long id);
 	

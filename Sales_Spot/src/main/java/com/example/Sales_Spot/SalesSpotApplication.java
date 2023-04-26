@@ -41,38 +41,44 @@ public class SalesSpotApplication {
 			priorityRepository.save(new Priority("Low"));
 
 			// some tasks
-			Task task1 = new Task("Call Bob", priorityRepository.findByName("High").get(0));
-			Task task2 = new Task("Faxes", priorityRepository.findByName("Low").get(0));
+			Task task1 = new Task("Call Kari -Musti ja Mirri", priorityRepository.findByName("High").get(0));
+			Task task2 = new Task("Check delivery status- Petenkoiratarvike", priorityRepository.findByName("Low").get(0));
 			repository.save(task1);
 			repository.save(task2);
 
 			// some customers
 			log.info("save a couple of customers");
-			customerRepository.save(new Customer("Musti ja Mirri", "274 Koira Katu Helsinki", "22 Lintu Polku Helsinki",
-					"0800 305305", "Joe"));
-			customerRepository.save(new Customer("Petenkoira", "274 Koira Katu Helsinki", "22 Lintu Polku Helsinki",
-					"0800 305305", "Joe"));
+			customerRepository.save(new Customer("Musti ja Mirri", "274 Koirakatu Helsinki 0223", "22 Lintu Polku Vantaa 0225",
+					"0803053055", "Kari Kesa"));
+			customerRepository.save(new Customer("Petenkoiratarvike", "12B Kissapolku Oulu 0550", "144 Fredrikinkatu Helsinki 5505",
+					"0488844047", "Sanna Marin"));
+			customerRepository.save(new Customer("Omaelainklinikka", "4C Piispansilta Pasila 5508", "2 Tiistilantie Espoo 8788",
+					"0854920758", "Teija Vanikainen"));
 			
 			//some products
 			log.info("save a couple of products");
-			productRepository.save(new Product("Kong Chew Toy", "Large plastic chew toy for dogs",(long) 12));
-		
+			productRepository.save(new Product("Kong Chew Toy XL", "Large plastic chew toy for dogs",(long) 12));
+			productRepository.save(new Product("Kong Chew Toy S", "Small plastic chew toy for dogs",(long) 8));
+			productRepository.save(new Product("Lavendar Lovelies", "Lavendar scented poop bags for dogs x50",(long) 14));
+			productRepository.save(new Product("Sunny-Pups Strawberry Summer M", "Gel cooling pad for dogs",(long) 20));
+			productRepository.save(new Product("Vetramil Spray 100ml", "Propalis disinfectant spray",(long) 10));
+			
 			//some statuses
 			log.info("some statuses");
-			statusRepository.save(new Status("Opened"));
-			statusRepository.save(new Status("Pending"));
+			statusRepository.save(new Status("Order opened"));
+			statusRepository.save(new Status("Pending payment"));
 			statusRepository.save(new Status("Shipped"));
 			statusRepository.save(new Status("Delivered"));
 			statusRepository.save(new Status("Cancelled"));
 			
 			// some orders
-			Bestel bestel1 = new Bestel("Winter selection", customerRepository.findByName("Petenkoira").get(0), 
-					productRepository.findByName("Kong Chew Toy").get(0), 
-					(long) 100,"2021",statusRepository.findByName("Shipped").get(0)
+			Bestel bestel1 = new Bestel("Toy Restock", customerRepository.findByName("Petenkoiratarvike").get(0), 
+					productRepository.findByName("Kong Chew Toy XL").get(0), 
+					(long) 100,"2023-04-27",statusRepository.findByName("Delivered").get(0)
 					);
-			Bestel bestel2 = new Bestel("Spring selection", customerRepository.findByName("Musti ja Mirri").get(0), 
-					productRepository.findByName("Kong Chew Toy").get(0), 
-					(long) 50,"2022",statusRepository.findByName("Pending").get(0)
+			Bestel bestel2 = new Bestel("Spring Selection", customerRepository.findByName("Musti ja Mirri").get(0), 
+					productRepository.findByName("Sunny-Pups Strawberry Summer M").get(0), 
+					(long) 50,"2023-05-09",statusRepository.findByName("Shipped").get(0)
 					);
 
 			bestelRepository.save(bestel1);

@@ -10,7 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-
+import jakarta.validation.constraints.NotEmpty;
+//products available for order
 @Entity
 public class Product {
 	@Id
@@ -20,6 +21,7 @@ public class Product {
 	private String description;
 	private Long price;
 		
+	//linked to bestel/order
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
 	private List<Bestel> bestels;
@@ -34,7 +36,7 @@ public class Product {
 		this.description=description;
 		this.price=price;
 	}
-
+//getters and setters
 	public Long getProductId() {
 		return productId;
 	}

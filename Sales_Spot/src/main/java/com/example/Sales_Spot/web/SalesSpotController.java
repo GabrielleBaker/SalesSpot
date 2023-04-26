@@ -59,7 +59,6 @@ public class SalesSpotController {
 	public String helloSecure(Model model) {
 		UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = user.getUsername();
-		// System.out.println("USERNAME: " + username);
 		model.addAttribute("name", username);
 		model.addAttribute("tasks", repository.findAll());
 		return "home";
@@ -96,8 +95,8 @@ public class SalesSpotController {
 	}
 
 	// delete order
-	@RequestMapping(value = "/deletebestel/{id}", method = RequestMethod.GET)
 	// only admin may delete orders
+	@RequestMapping(value = "/deletebestel/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deletebestel(@PathVariable("id") Long bestelId, Model model) {
 		bestelRepository.deleteById(bestelId);
@@ -130,8 +129,9 @@ public class SalesSpotController {
 		model.addAttribute("products", productRepository.findAll());
 		return "productList";
 	}
+	
 	// adding,editing,deleting products is for admin only
-	//regular sales staff can only select from the list
+	//regular sales staff can only select from the list of products
 
 	// new product
 	@RequestMapping(value = "/newproduct", method = RequestMethod.GET)
@@ -202,7 +202,7 @@ public class SalesSpotController {
 		return "editcustomer";
 	}
 
-//tasks on homepage
+	//tasks on homepage
 	// new task
 	@RequestMapping(value = "/addTask", method = RequestMethod.GET)
 	public String addtasks(Model model) {

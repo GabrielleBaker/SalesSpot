@@ -10,7 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+//customer entity
 @Entity
 public class Customer {
 	@Id
@@ -22,6 +24,7 @@ public class Customer {
 	private String contactNumber;
 	private String contactPerson;
 	
+	//linked in a one to many relationship with the order/bestel entity
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Bestel> bestels;
@@ -40,7 +43,7 @@ public class Customer {
 	}
 
 	
-
+//getters and setters for fields in the customer entity
 	public Long getCustomerId() {
 		return customerId;
 	}

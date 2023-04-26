@@ -1,5 +1,5 @@
 package com.example.Sales_Spot.domain;
-
+//task repository for home page task board
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;

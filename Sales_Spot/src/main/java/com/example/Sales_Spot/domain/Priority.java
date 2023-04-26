@@ -10,7 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-
+//priority exists to be linked to the task entity 
+//used to determine how important a task is
 @Entity
 public class Priority {
 	@Id

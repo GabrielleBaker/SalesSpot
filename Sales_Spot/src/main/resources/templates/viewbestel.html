@@ -125,13 +125,6 @@
 				<input type="number" class="form-control" id="price"
 						th:field="*{product.price}" readonly />
 				</div>
-				<!-- issue with total calculation -->
-				<label for="totalprice" class="col-sm-2 col-form-label">Total:</label>
-				<div class="col-sm-10">
-					<input type="number" class="form-control" id="totalprice" 
-					value="${product.getPrice() * quantity}"
-       			 readonly/>
-       			</div>
 					<label for="name" class="col-sm-2 col-form-label">Delivery
 						Status:</label>
 					<div class="col-sm-10">

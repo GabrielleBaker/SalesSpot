@@ -8,6 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+//this is the Order entity
+//it was renamed to bestel as order seemed to be a keyword of some kind
+//and created error messages
+//bestel =to order in Afrikaans 
 
 @Entity
 public class Bestel {
@@ -19,19 +23,19 @@ public class Bestel {
 	private String duedate;
 	private Long quantity;
 	
-	// status entity
+	// status entity, accessed via status id
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "statusId")
 	private Status status;
 	
-	//customer entity
+	//customer entity accessed via customer id
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "customerId")
 	private Customer customer;
 
-	//product entity
+	//product entity accessed via product id
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "productId")

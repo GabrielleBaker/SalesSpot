@@ -10,12 +10,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-
+//status on orders shipment
 @Entity
 public class Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long statusId;
+	
 	private String name;
 
 	@JsonIgnore
