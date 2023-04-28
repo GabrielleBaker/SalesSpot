@@ -28,7 +28,7 @@ public class SalesSpotApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SalesSpotApplication.class, args);
 	}
-
+/*
 	@Bean
 	public CommandLineRunner demo(TaskRepository repository, PriorityRepository priorityRepository,
 			AppUserRepository urepository, CustomerRepository customerRepository, 
@@ -101,5 +101,5 @@ public class SalesSpotApplication {
 			}
 
 		};
-	}
+	}*/
 }
